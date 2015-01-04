@@ -1,6 +1,5 @@
-img[alt='Brand'] {
-    height: 25px;
-    width: 25px;
+attr > code {
+    cursor: help;
 }
 
 footer {
@@ -22,6 +21,19 @@ footer img[alt='Brand'] {
     margin: 7px 0 10px;
 }
 
+header a {
+    color: black;
+}
+
+img[alt='Brand'] {
+    height: 25px;
+    width: 25px;
+}
+
+mark {
+    color: crimson;
+    font-size: 16px;
+}
 
 #projects dd {
     margin-bottom: 15px;
@@ -44,4 +56,22 @@ footer img[alt='Brand'] {
 .navbar-default {
     background-color: transparent;
     border-width: 0;
+}
+
+.navbar-nav > .active > a {
+    background-color: #eee;
+}
+
+#content .syntaxhighlighter {
+    background-color: #f5f5f5 !important;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    display: block;
+    font-size: 13px;
+    line-height: 1.42857;
+    margin: 0 0 10px;
+    padding: 9.5px;
+    word-break: break-all;
+    word-wrap: break-word;
 }
