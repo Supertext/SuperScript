@@ -16,7 +16,7 @@
     <header class="navbar navbar-static-top bs-docs-nav">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/SuperScript">
+                <a class="navbar-brand" href="index.html">
                     <img alt="Brand" src="img/superscript-logo.gif">
                 </a>
             </div>
@@ -49,7 +49,7 @@
                     </p>
 
                     <p>
-                        <mark><strong><em>This documentation is still being added. Please bear with us while we complete this documentation.</em></strong></mark>
+                        <mark><strong><em>This documentation is still being written. Please bear with us while we complete this documentation.</em></strong></mark>
                     </p>
                 </div>
 
@@ -59,133 +59,92 @@
 
                 <div class="col-xs-12">
 
-                    <h2>Core Concepts</h2>
-
-                    <h3>What actually happens</h3>
+                    <h2><a id="what-does-it-do">What Does It Do?</a></h2>
 
                     <p>
-                        SuperScript allows developers to make declarations, whatever these might be: a JavaScript variable, for example.
-                        These declarations are added to a central, application-wide collection.
-                    </p>
-
-                    <pre class="brush: c#">
-                        SuperScript.Declarations.AddDeclaration&lt;StandardDeclaration&gt;(myDecl);
-                    </pre>
-
-                    <p>
-                        or
-                    </p>
-
-                    <pre class="brush: c#">
-                        SuperScript.Declarations.AddDeclarations(IEnumerable&lt;DeclarationBase&gt;);                   
-                    </pre>
-
-                    <p>
-                        Alternatively, using one of the <i>container</i> projects then a declaration can be added with
-                    </p>
-
-                    <pre class="brush: xml">
-                        [WebForms]
-                        &lt;spx:javascriptcontainer runat="server" emitterkey="javascript"&gt;
-                            &lt;!-- The script tag is not required here, but it offers intellisense when used. --&gt;
-                            &lt;script type="text/javascript"&gt;
-                                var myVar = "hello world"; /* A comment */
-                            &lt;/script&gt;
-                        &lt;/spx:javascriptcontainer&gt;
-                    </pre>
-
-                    <pre class="brush: razor">
-                        [Razor view]
-                        @using (Html.JavaScriptContainer())
-                        {
-                            &lt;script type="text/javascript"&gt;
-                                var myVar = "hello world"; /* A comment */
-                            &lt;/script&gt;
-                        }
-                    </pre>
-
-                    <p>
-                        Certain projects accommodate an inline expression which allows the declaration to be created while being added.
-                    </p>
-
-                    <pre class="brush: c#">
-                        SuperScript.JavaScript.Declarations.AddVariable(opt => opt.AssignExisting(false)
-                                                                                  .Comment("A comment")
-                                                                                  .EmitterKey("javascript")
-                                                                                  .InsertAt(null)
-                                                                                  .Name("myVar")
-                                                                                  .Value("hello world"));                              
-                    </pre>
-
-                    <p>
-                        Most of the above options (<code>Comment</code>, <code>Name</code> and <code>Value</code>) should have a clear function, though <code>EmitterKey</code> will be
-                        explained in a few moments. For now, just keep in mind that an <code>emitter</code> can be thought of as a pipeline which will be used to
-                        process declarations and append the output to the webpage.
+                        SuperScript has been built as a flexible, modular set of libraries, each offering slightly different functionality, often building on top of
+                        other SuperScript modules. Consequently, the easiest way to explain what SuperScript does is to use some examples.
                     </p>
 
                     <p>
-                        Therefore, every declaration references an emitter. Even if the developer doesn't specify the key of an emitter while adding the declaration,
-                        SuperScript will use the default emitter.
+                        SuperScript has two aspects:
                     </p>
 
+                    <h4>Declarations</h4>
                     <p>
-                        Once declarations have been added to the collection the next step is to <i>emit</i> the declarations. This is done in the most
-                        convenient location - for example, JavaScript declarations will most likely be emitted just prior to the closing <code>&lt;/html&gt;</code> tag.
+                        A <em>declaration</em> refers to object which you describe to SuperScript, and which you will later want SuperScript to return.
                     </p>
-
                     <p>
-                        When emitting, you can choose to emit
+                        Some examples might include
                     </p>
-
                     <ul>
-                        <li>specific declarations</li>
-                        <li>for a specific emitter or emitters</li>
-                        <li>for all emitters</li>
+                        <li>
+                            JavaScript variables or function calls declared in server-side code, or a <code>&lt;script&gt;</code> block on a WebForms <em>.aspx</em> file
+                            or an MVC Razor view
+                        </li>
+                        <li>
+                            HTML templates declared in server-side code, or a <code>&lt;script&gt;</code> block on a WebForms <em>.aspx</em> file
+                            or an MVC Razor view
+                        </li>
                     </ul>
-
                     <p>
-                        If using WebForms
+                        The base declaration is easily extendable to cover any other concerns.
+                    </p>
+                    <p>
+                        For example, supposing a developer plans to write their entire CSS in the webpage's <code>&lt;head&gt;</code> section, yet the selecters
+                        were declared throughout their server-side application: a declaration could be derived which allows the developer to programmatically (or using a
+                        container control) declare their CSS selecters to SuperScript, thus <em>gathering up</em> all these selecters into a single collection.
                     </p>
 
-                    <pre class="brush: c#; html-script: true">
-                        <%: SuperScript.Declarations.Emit("myVar") %>           <%-- emits a specific declaration by its 'Name' property --%>
-                        <%: SuperScript.Declarations.EmitFor("javascript") %>   <%-- emits all declarations which are using the "javascript" emitter --%>
-                        <%: SuperScript.Declarations.EmitForAll() %>            <%-- emits the declarations for all emitters --%>
-                    </pre>
-
+                    <h4>Emissions</h4>
                     <p>
-                        And if using ASP.NET MVC (Razor views)
+                        An <em>emitter</em> is an object which renders one or more declarations in a pre-determined way and in a specific location.
+                    </p>
+                    <p>
+                        For example
+                    </p>
+                    <ul>
+                        <li>
+                            Placing all JavaScript declarations at an optimal location on a webpage
+                        </li>
+                        <li>
+                            Moving declarations into an external file and writing a <code>&lt;script&gt;</code> tag on the webpage
+                        </li>
+                    </ul>
+                    <p>
+                        The emitting of declarations is the act of rendering specific declarations, groups of similarly-processed declarations, or <em>all</em>
+                        declarations in an optimal place.
+                    </p>
+                    <p>
+                        For example, by declaring JavaScript variables against a JavaScript-specific emitter, all JavaScript variables may be emitted in a
+                        specific location, typically immediately before the <code>&lt;/body&gt;</code> tag.
+                    </p>
+                    <p>
+                        Furthermore, emitters also offer processing functionality which offers opportunities for modifying the collection of declarations, or
+                        per-compiling HTML templates.
                     </p>
 
-                    <pre class="brush: razor">
-                        @using SuperScript
-                        ...
-                        @SuperScript.Declarations.Emit("myVar")             <!-- emits a specific declaration by its 'Name' property -->
-                        @SuperScript.Declarations.EmitFor("javascript")     <!-- emits all declarations which are using the "javascript" emitter -->
-                        @SuperScript.Declarations.EmitForAll()              <!-- emits the declarations for all emitters -->
-                    </pre>
+                </div>
+                
 
-
-                    <h3>Declarables</h3>
-
+                <div class="col-xs-12">
+                    
+                    <h2>Where Next?</h2>
+                    
                     <p>
-                        A <i>declarable</i> is simply an instance of <attr title="SuperScript.Common.Declarables.DeclarationBase"><code>SuperScript.Common.Declarables.DeclarationBase</code></attr>. The content of the declaration
-                        can be many things, depending upon the derivation of <attr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></attr>. For example, SuperScript.Templates allows an HTML
-                        template to be declared.
+                        SuperScript offers a variety of functionality and consequently consists of multiple, optional libraries. This page lists each of the current
+                        projects along with a brief explanationof the functionality offered.
                     </p>
-
                     <p>
-                        The central collection of declarations is added to an <attr title="IList<SuperScript.Declarables.DeclarationBase>"><code>IList&lt;DeclarationBase&gt;</code></attr>, so it's trivial to derive a custom
-                        declaration and have this added to the collection.
+                        <a href="current-projects.html">View the current projects</a>
                     </p>
-
-
-                    <h3>Emitters</h3>
-
+                    
                     <p>
-                        An emitter may be thought of as a pipeline which consists of objects which can modify the declarations, and then write the output
-                        to the webpage. An emitter is passed a collection of <attr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></attr> objects, and the end of the process returns an
-                        <attr title="System.Web.IHtmlString"><code>IHtmlString</code></attr>.
+                        Although SuperScript's functionality is divided across multiple libraries, the fundamentals are common to each. This page explains the core
+                        concepts behind SuperScript.
+                    </p>
+                    <p>
+                        <a href="core-concepts.html">Read an explanation of the core concepts</a>
                     </p>
 
                 </div>
@@ -205,7 +164,7 @@
                 <a href="https://github.com/Supertext/SuperScript">View on GitHub</a>
             </p>
             <p>
-                <a href="/SuperScript"><img alt="Brand" src="img/superscript-logo.gif"></a>
+                <a href="index.html"><img alt="Brand" src="img/superscript-logo.gif"></a>
             </p>
         </div>
     </footer>
