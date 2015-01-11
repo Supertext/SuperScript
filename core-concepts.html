@@ -8,7 +8,7 @@
         <link href="css/shCoreDefault.css" rel="stylesheet">
         <link href="css/shThemeDefault.css" rel="stylesheet">
         <link rel="icon" href="img/favicon.ico">
-        <title>SuperScript Documentation</title>
+        <title>SuperScript Documentation - Core Concepts</title>
     </head>
 
 <body>
@@ -23,6 +23,7 @@
             <nav class="collapse navbar-collapse bs-navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="current-projects.html">Current Projects</a></li>
+                    <li class="active"><a href="core-concepts.html">Core Concepts</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="https://github.com/Supertext/SuperScript">View on GitHub</a></li>
@@ -72,7 +73,7 @@
 
                     <p>
                         SuperScript allows developers to make declarations, whatever these might be: a JavaScript variable is a simple, convenient example.
-                        These declarations are added to a central, application-wide collection.
+                        These declarations are added to a central, application-wide collection of all declarations.
                     </p>
 
                     <img src="img/core-1.gif" alt="Wherever declarations are made, they are added to the same collection" class="center-block gutter-bottom" />
@@ -121,20 +122,20 @@
                     <h3 id="processing-declarations">Processing Declarations</h3>
 
                     <p>
-                        The emitter pipeline offers three opportunities to modify the client-side form of the emitter-specific collection of declarations:
+                        The emitter pipeline offers four opportunities to modify the client-side form of the emitter-specific collection of declarations:
                     </p>
 
-                    <dl>
-                        <dt><h4><attr title="SuperScript.Modifiers.Pre.CollectionPreModifier"><code>CollectionPreModifier</code></attr></h4></dt>
-                        <dd>
+                    <ul>
+                        <li>
+                            <h4><attr title="SuperScript.Modifiers.Pre.CollectionPreModifier"><code>CollectionPreModifier</code></attr></h4>
                             <p>
                                 The first stage in the emitter pipeline is passed the raw, currently-unmodified collection of <attr title="SuperScript.Declarables.DeclarationBase"><code>DeclarationBase</code></attr> objects,
                                 and returns a collection of <attr title="SuperScript.Declarables.DeclarationBase"><code>DeclarationBase</code></attr> objects.
                             </p>
                             <p><a href="https://github.com/Supertext/SuperScript.Common/blob/master/Modifiers/Pre/CollectionPreModifier.cs" target="_blank">View this class on GitHub</a></p>
-                        </dd>
-                        <dt><h4><attr title="SuperScript.Modifiers.Converters.CollectionConverter"><code>CollectionConverter</code></attr></h4></dt>
-                        <dd>
+                        </li>
+                        <li>
+                            <h4><attr title="SuperScript.Modifiers.Converters.CollectionConverter"><code>CollectionConverter</code></attr></h4>
                             <p>
                                 The second stage in the emitter pipeline takes the output from the first stage, a collection of <attr title="SuperScript.Declarables.DeclarationBase"><code>DeclarationBase</code></attr> objects,
                                 and uses the internal logic of the specific implementation of <attr title="SuperScript.Declarables.DeclarationBase"><code>DeclarationBase</code></attr> to
@@ -145,9 +146,9 @@
                                 passed to this emitter.
                             </p>
                             <p><a href="https://github.com/Supertext/SuperScript.Common/blob/master/Modifiers/Converters/CollectionConverter.cs" target="_blank">View this class on GitHub</a></p>
-                        </dd>
-                        <dt><h4><attr title="SuperScript.Modifiers.Post.CollectionPostModifier"><code>CollectionPostModifier</code></attr></h4></dt>
-                        <dd>
+                        </li>
+                        <li>
+                            <h4><attr title="SuperScript.Modifiers.Post.CollectionPostModifier"><code>CollectionPostModifier</code></attr></h4>
                             <p>
                                 The next stage in the emitter pipeline takes the output from the second stage and offers the opportunity to modify the client-side form of the declarations
                                 passed to this emitter.
@@ -156,17 +157,17 @@
                                 An example of the advantage which this stage offers is the possibility to minify JavaScript or to pre-compile HTML templates.
                             </p>
                             <p><a href="https://github.com/Supertext/SuperScript.Common/blob/master/Modifiers/Post/CollectionPostModifier.cs" target="_blank">View this class on GitHub</a></p>
-                        </dd>
-                    </dl>
+                        </li>
+                    </ul>
 
                     <p>
                         The final step implemented by an emitter uses an instance of an <attr title="SuperScript.Modifiers.Writers.HtmlWriter"><code>HtmlWriter</code></attr> to write
                         the output to the webpage. In actuality, this still offers the opportunity to modify the output.
                     </p>
 
-                    <dl>
-                        <dt><h4><attr title="SuperScript.Modifiers.Writers.HtmlWriter"><code>HtmlWriter</code></attr></h4></dt>
-                        <dd>
+                    <ul>
+                        <li>
+                            <h4><attr title="SuperScript.Modifiers.Writers.HtmlWriter"><code>HtmlWriter</code></attr></h4>
                             <p>
                                 The <attr title="SuperScript.Modifiers.Writers.HtmlWriter"><code>HtmlWriter</code></attr> is passed a string and returns an
                                 <attr title="System.Web.IHtmlString"><code>IHtmlString</code></attr>.
@@ -180,13 +181,24 @@
                                 tag to the webpage which references the created <em>*.js</em> file.
                             </p>
                             <p><a href="https://github.com/Supertext/SuperScript.Common/blob/master/Modifiers/Writers/HtmlWriter.cs" target="_blank">View this class on GitHub</a></p>
-                        </dd>
-                    </dl>
+                        </li>
+                    </ul>
 
                     <img src="img/core-2.gif" alt="Wherever declarations are made, they are added to the same collection" class="center-block gutter-bottom" />
 
                     <p>
                         It should now be clear that the output from processing an emitter's declarations <em>is</em> the output of the emitter, thus stage 3 in an emitter's process.
+                    </p>
+
+
+
+
+
+
+                    <h2>Further Information</h2>
+
+                    <p>
+                        Read more about the emitter <a href="emitters.html">here</a>.
                     </p>
 
                 </div>
@@ -223,5 +235,7 @@
     </script>
 
 </body>
+
+
 
 </html>
