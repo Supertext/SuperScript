@@ -64,9 +64,7 @@
                         <mark><strong><em>This documentation is still being written. Please bear with us while we complete this documentation.</em></strong></mark>
                     </p>
 
-                    <h2>The Emitter</h2>
-
-                    <h3 id="pass-declarations-emitter">Passing Declarations to an Emitter</h3>
+                    <h2>Emitting Declarations</h2>
 
                     <p>
                         We now know that an application using SuperScript has an application-wide collection of declarations, and that these are then passed to
@@ -77,19 +75,7 @@
                         One thing which has yet to be explained is how and which emitter the declarations are passed through.
                     </p>
 
-                    <h4 id="multiple-emitters">Multiple Emitters</h4>
-
-                    <p>
-                        An application may have multiple emitters, each with a different set of <em>modifiers</em>, and each with a different
-                        <attr title="SuperScript.Emitters.IEmitter.Key"><code>key</code></attr>. The <attr title="SuperScript.Emitters.IEmitter.Key"><code>key</code></attr>
-                        is essentially a name for the emitter. Each emitter must therefore have a unique <attr title="SuperScript.Emitters.IEmitter.Key"><code>key</code></attr>.
-                    </p>
-
-                    <p>
-                        And when a declaration is created, an emitter's key is specified.
-                    </p>
-
-                    <h4 id="how-to-emit">How to Emit</h4>
+                    <h3 id="how-to-emit">How to Emit</h3>
 
                     <p>
                         In the desired, optimal location for writing the output of an emitter, there are three possible methods for writing the output.
@@ -99,7 +85,8 @@
                         <li>
                             <h4>Output a specific declaration</h4>
                             <p>
-                                By specifying the <em>Name</em> property of a declaration.
+                                By specifying the <em>Name</em> property of a declaration. [<strong>Important: </strong> not all implementations of
+                                <abbr title="SuperScript.Declarables.DeclarationBase"><code>DeclarationBase</code></abbr> have a <em>Name</em> property.]
                             </p>
                             <pre class="brush: c#; html-script: true">
                                 [WebForms]
@@ -113,14 +100,14 @@
                                 The above examples assume that a declaration with the <em>Name</em> "myVar" has been added to <code>Superscript.Declarations</code>.
                             </p>
                             <p>
-                                Calling <code>Emit</code> instructs SuperScript to pull the specified instance of <attr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></attr>,
+                                Calling <code>Emit</code> instructs SuperScript to pull the specified instance of <abbr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></abbr>,
                                 determine which emitter should process it, and the passes the instance to that emitter.
                             </p>
                         </li>
                         <li>
                             <h4>Output all declarations for a specific emitter</h4>
                             <p>
-                                By specifying the <attr title="SuperScript.Emitters.IEmitter.Key"><code>key</code></attr> of an emitter.
+                                By specifying the <abbr title="SuperScript.Emitters.IEmitter.Key"><code>Key</code></abbr> of an emitter.
                             </p>
                             <pre class="brush: c#; html-script: true">
                                 [WebForms]
@@ -131,12 +118,12 @@
                                 @SuperScript.Declarations.EmitFor("javascript")
                             </pre>
                             <p class="small">
-                                The above examples assume that an emitter has been declared with the <attr title="SuperScript.Emitters.IEmitter.Key"><code>key</code></attr> "javascript".
+                                The above examples assume that an emitter has been declared with the <abbr title="SuperScript.Emitters.IEmitter.Key"><code>Key</code></abbr> "javascript".
                             </p>
                             <p>
-                                Calling <code>EmitFor</code> instructs SuperScript to retrieve all instances of <attr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></attr>
-                                which reference the specified emitter <attr title="SuperScript.Emitters.IEmitter.Key"><code>key</code></attr>, then pass this collection of
-                                <attr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></attr> objects to that emitter.
+                                Calling <code>EmitFor</code> instructs SuperScript to retrieve all instances of <abbr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></abbr>
+                                which reference the specified emitter <abbr title="SuperScript.Emitters.IEmitter.Key"><code>Key</code></abbr>, then pass this collection of
+                                <abbr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></abbr> objects to that emitter.
                             </p>
                         </li>
                         <li>
@@ -151,8 +138,8 @@
                                 @SuperScript.Declarations.EmitForAll()
                             </pre>
                             <p>
-                                Calling <code>EmitForAll</code> instructs SuperScript to group all instances of <attr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></attr>
-                                by their <attr title="SuperScript.Emitters.IEmitter.Key"><code>key</code></attr> properties, then pass each group to that group's emitter.
+                                Calling <code>EmitForAll</code> instructs SuperScript to group all instances of <abbr title="SuperScript.Common.Declarables.DeclarationBase"><code>DeclarationBase</code></abbr>
+                                by their <abbr title="SuperScript.Emitters.IEmitter.Key"><code>Key</code></abbr> properties, then pass each group to that group's emitter.
                             </p>
                         </li>
                     </ul>

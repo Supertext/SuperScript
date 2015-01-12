@@ -26,6 +26,14 @@ footer img[alt='Brand'] {
     margin: 7px 0 10px;
 }
 
+h3 {
+    margin-top: 30px;
+}
+
+h4 {
+    margin-top: 25px;
+}
+
 header a {
     color: black;
 }
@@ -38,6 +46,14 @@ img[alt='Brand'] {
 mark {
     color: crimson;
     font-size: 16px;
+}
+
+table > thead > tr {
+    background-color: #f5f5f5;
+}
+
+table tr > td:first-child {
+    font-weight: bold;
 }
 
 #projects dd {
