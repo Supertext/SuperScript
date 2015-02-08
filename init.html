@@ -111,7 +111,7 @@
                         
                         <pre class="brush: c#">
                           // Initialise the collection of Declarations for this request
-                          SuperScript.Declarations.Collection = new Collection<SuperScript.Declarables.DeclarationBase>();
+                          SuperScript.Declarations.Collection = new Collection&lt;SuperScript.Declarables.DeclarationBase&gt;();
               
                           // Set all instances of BundledEmitter
                           SuperScript.Declarations.EmitterBundles = SuperScript.Configuration.Settings.Instance.EmitterBundles;
@@ -147,7 +147,7 @@
                           private void Application_BeginRequest(object sender, EventArgs e)
                           {
                             // Initialise the collection of Declarations for this request
-                            SuperScript.Declarations.Collection = new Collection<SuperScript.Declarables.DeclarationBase>();
+                            SuperScript.Declarations.Collection = new Collection&lt;SuperScript.Declarables.DeclarationBase&gt;();
                 
                             // Set all instances of BundledEmitter
                             SuperScript.Declarations.EmitterBundles = SuperScript.Configuration.Settings.Instance.EmitterBundles;
