@@ -107,8 +107,8 @@
 				                    &lt;/postModifiers&gt;
                                     &lt;writers&gt;
                                         &lt;modifier type="SuperScript.ExternalFile.Modifiers.Writers.ExternalScriptWriter, SuperScript.ExternalFile" /&gt;
-				                    &lt;/writers&gt;
-			                    &lt;/emitter&gt;                        
+									&lt;/writers&gt;
+								&lt;/emitter&gt;
                             &lt;/emitters&gt;
                         &lt;/superScript&gt;
                     </pre>
@@ -191,7 +191,29 @@
                         default emitter, any declarations which are added to <abbr title="SuperScript.Declarations.Collection"><code>SuperScript.Declarations.Collection</code></abbr>
                         <em>without</em> an emitter key being stated will automatically be emitted using this (default) emitter.
                     </p>
+                    
+                    <h4>Implementation-specific Properties</h4>
 
+					<p>
+						Some implementations of <abbr title="SuperScript.Modifiers.ModifierBase"><code>ModifierBase</code></abbr> expose
+						custom properties. The following example demonstrates how to declare values for these properties in a config file.
+					</p>
+			
+					<pre class="brush: xml">
+						&lt;modifier type="&hellip;"&gt;
+							&lt;properties&gt;
+								&lt;property name="PROPERTY-NAME" value="PROPERTY-VALUE" type="PROPERTY-TYPE" /&gt;
+								&lt;!-- multiple &lt;property&gt; elements may be declared here --&gt;
+							&lt;/properties&gt;
+						&lt;/modifier&gt;
+					</pre>
+					
+					<p>
+						Unfortunately custom <abbr title="SuperScript.Modifiers.ModifierBase"><code>ModifierBase</code></abbr> properties 
+						which have a collection type (<em>i.e.</em>, an <code>IEnumerable</code>) cannot be declared in a config file. Such
+						custom properties must be declared programmatically.
+					</p>
+		
 
                     <h3 id="emitter-programmatically">Specifying an emitter programmatically</h3>
 
